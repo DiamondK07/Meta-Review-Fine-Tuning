@@ -72,7 +72,7 @@ python summarize.py
 
 ### 8. Fine-tuned Model Files
 
-The fine-tuned model is present in the "results" folder:
+The fine-tuned model is present in the "results" folder (shared drive link with the submission email)
 
 
 
