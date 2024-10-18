@@ -70,6 +70,11 @@ To generate summaries using the fine-tuned model, run:
 python summarize.py
 ```
 
+### 8. Fine-tuned Model Files
+
+The fine-tuned model is present in the "results" folder:
+
+
 
 ## Requirements
 
