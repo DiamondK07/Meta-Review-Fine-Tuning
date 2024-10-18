@@ -1,0 +1,29 @@
+
+# Initialize the summarization pipeline with the fine-tuned model
+summarizer = pipeline("summarization", model="./results/final_model", tokenizer=tokenizer, device=0)
+
+# Load the evaluation dataset
+eval_dataset = load_dataset('zqz979/meta-review', split='validation')
+eval_dataset = eval_dataset.filter(lambda x: x['Input'] is not None and x['Output'] is not None and len(x['Input'].strip()) > 0)
+
+# Generate summaries
+generated_summaries = []
+for article in eval_dataset['Input']:
+    summary = summarizer(article, max_length=150, min_length=40, truncation=True)
+    generated_summaries.append(summary[0]['summary_text'])
+
+# Load the ROUGE metric using the evaluate library
+rouge = evaluate.load('rouge')
+
+# Compute ROUGE scores
+results = rouge.compute(predictions=generated_summaries, references=eval_dataset['Output'])
+
+# Print ROUGE Scores
+print("ROUGE Scores:", results)
+
+# Save the results to a zip file if needed
+def zip_results(output_dir):
+    shutil.make_archive("training_outputs", 'zip', output_dir)
+    print("Results zipped successfully!")
+
+zip_results('./results')

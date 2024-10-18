@@ -1,0 +1,9 @@
+transformers
+datasets
+torch
+sentencepiece
+numpy
+pandas
+scikit-learn
+tqdm
+evaluate
